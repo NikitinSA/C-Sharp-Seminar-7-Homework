@@ -23,7 +23,7 @@ int[,] array = new int[10, 10];
 FillArray(array);
 PrintArray(array);
 Console.WriteLine();
-Console.Write($"Число равное заданным позициям {FindingNumber(array, indexLine, indexColumn)}");
+FindingNumber(array, indexLine, indexColumn);
 
 void FillArray(int[,] array)
 {
@@ -31,7 +31,7 @@ void FillArray(int[,] array)
     {
         for (int j = 0; j < 10; j++)
         {
-            array[i, j] = new Random().Next(0, 100);
+            array[i, j] = new Random().Next(1, 100);
         }
     }
 }
@@ -48,18 +48,25 @@ void PrintArray(int[,] array)
     }
 }
 
-int FindingNumber(int[,] array, int indexLine, int indexColumn)
+void FindingNumber(int[,] array, int indexLine, int indexColumn)
 {
     int res = 0;
-    for (int i = 0; i < array.GetLength(0); i++)
+    for (int j = 0; j < array.GetLength(1); j++)
     {
-        for (int j = 0; j < array.GetLength(1); j++)
+        for (int i = 0; i < array.GetLength(0); i++)
         {
-            if (indexLine == j && indexColumn == i)
+            if (indexLine == i && indexColumn == j)
             {
                 res = array[i, j];
             }
         }
     }
-    return res;
+    if (res != 0)
+    {
+        Console.Write($"Число равное заданным позициям {res}.");
+    }
+    else
+    {
+        Console.Write("Такого числа в массиве нет.");
+    }
 }
